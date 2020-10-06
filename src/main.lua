@@ -5,14 +5,23 @@ function _init()
   }
   score=0
   bullets={}
+  enemy_bullets={}
   enemies={}
   last_fire=0
+  enemy_columns={}
 
+  local column=0
   for i=13,78,13 do
+    enemy_columns[column]={}
     for j=13,78,13 do
-      add(enemies, make_enemy(i,j))
+      local enemy=make_enemy(i,j)
+      add(enemies, enemy)
+      add(enemy_columns[column], enemy)
     end
+    column+=1
   end
+
+
 end
   
 function _update()
@@ -26,6 +35,14 @@ function _update()
   end
   for e in all(enemies) do
     e:update()
+  end
+
+  for column in all(enemy_columns) do
+    local num=flr(rnd(30))
+    if num==1 then
+      --printh("enemy firing!")
+      enemy_fire_bullet(last(column))
+    end
   end
 end
   
@@ -46,28 +63,7 @@ function _draw()
   end
 end
 
-function fire_bullet()
-  last_fire+=1
-  if last_fire<20 then
-    return
-  end
-  last_fire=0
 
-  add(bullets,{
-    x=player.x,
-    y=player.y,
-    draw=function(self)
-      pset(self.x,self.y,7)
-    end,
-    update=function(self)
-      self.y-=1
-    
-      if self.y<0 then
-        del(bellets, self)
-      end
-    end
-  })
-end
 
 function check_collision(b,e)
   --check to see if b is within
@@ -86,3 +82,7 @@ function check_collision(b,e)
    score+=1
   end
  end
+
+ --TODO
+ --delete enemies from column structure on death
+ --better OOP
