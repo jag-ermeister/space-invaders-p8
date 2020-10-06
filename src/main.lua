@@ -33,14 +33,16 @@ function _update()
   for b in all(bullets) do
     b:update()
   end
+  for eb in all(enemy_bullets) do
+    eb:update()
+  end
   for e in all(enemies) do
     e:update()
   end
 
   for column in all(enemy_columns) do
-    local num=flr(rnd(30))
-    if num==1 then
-      --printh("enemy firing!")
+    local num=flr(rnd(100))
+    if num==20 then -- 1 in 100 chance per frame
       enemy_fire_bullet(last(column))
     end
   end
@@ -52,6 +54,9 @@ function _draw()
   spr(3,player.x,player.y)
   for b in all(bullets) do
     b:draw()
+  end
+  for eb in all(enemy_bullets) do
+    eb:draw()
   end
   for e in all(enemies) do
     e:draw()
