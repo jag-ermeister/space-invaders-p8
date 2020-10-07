@@ -36,8 +36,8 @@ function _init()
 end
   
 function _update()
-  if btn(0) then player.x -= 1 end
-  if btn(1) then player.x += 1 end
+  player:update()
+
   if btn(2) then 
     fire_bullet() 
   end
@@ -56,7 +56,6 @@ function _update()
     if not is_empty(column) then
       local num = flr(rnd(100))
       if num == 20 then -- 1 in 100 chance per frame
-        printh("fire from column "..column_num)
         enemy_fire_bullet(last(column))
       end
     end
