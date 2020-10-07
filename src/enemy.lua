@@ -1,8 +1,9 @@
-function make_enemy(_x,_y)
+function make_enemy(_x,_y, _column)
   return {
     start_x=_x,
     x=_x,
     y=_y,
+    column=_column,
     sprite=1,
     dx=1,
     range=50,

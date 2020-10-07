@@ -1,4 +1,20 @@
 function _init()
+  printh("debugging")
+  local list = {}
+  --list[0]=0
+  --list[1]=1
+  -- list[2]=2
+  -- list[3]=3
+  -- list[4]=4
+  -- list[5]="poop"
+  -- list[6]="poop"
+  -- list[7]="poop"
+  -- list[5]="poop"
+  -- list[9]="crap"
+  -- printh(#list)
+
+  printh("end debugging")
+
   player={
     x=128/2,
     y=120
@@ -14,14 +30,12 @@ function _init()
   for i=13,78,13 do
     enemy_columns[column]={}
     for j=13,78,13 do
-      local enemy=make_enemy(i,j)
+      local enemy=make_enemy(i,j,column)
       add(enemies, enemy)
       add(enemy_columns[column], enemy)
     end
     column+=1
   end
-
-
 end
   
 function _update()
@@ -40,11 +54,16 @@ function _update()
     e:update()
   end
 
+  local column_num = 0
   for column in all(enemy_columns) do
-    local num=flr(rnd(100))
-    if num==20 then -- 1 in 100 chance per frame
-      enemy_fire_bullet(last(column))
+    if not is_empty(column) then
+      local num=flr(rnd(100))
+      if num==20 then -- 1 in 100 chance per frame
+        printh("fire from column "..column_num)
+        enemy_fire_bullet(last(column))
+      end
     end
+    column_num+=1
   end
 end
   
@@ -68,8 +87,6 @@ function _draw()
   end
 end
 
-
-
 function check_collision(b,e)
   --check to see if b is within
   --each corner of the e
@@ -84,10 +101,13 @@ function check_collision(b,e)
      b.x<=lr.x and b.y<=lr.y then
    del(enemies,e)
    del(bullets,b)
+   del(enemy_columns[e.column],e)
    score+=1
   end
  end
 
  --TODO
- --delete enemies from column structure on death
  --better OOP
+ --make sure player doesn't run off edge of screen
+ --enemies don't run off edge of screen
+ --seems like first column of enemies doesn't fire bullets?
