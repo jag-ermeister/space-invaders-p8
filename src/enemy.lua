@@ -6,7 +6,7 @@ function make_enemy(_x,_y, _column)
     column=_column,
     sprite=1,
     dx=1,
-    range=50,
+    range=40,
     last_update=0,
     update_rate=10,
     update=function(self)
