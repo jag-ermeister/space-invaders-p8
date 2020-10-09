@@ -17,6 +17,7 @@ function _init()
 
   player = new_player()
   score = 0
+  lives = 3
   bullets = {}
   enemy_bullets = {}
   enemies = {}
@@ -62,10 +63,22 @@ function _update()
     column_num += 1
   end
 end
+
+function display_stats()
+  local num_spaces = 15
+  if score > 9 then num_spaces -=1 end
+  
+  local spaces = ""
+  for i = 1, num_spaces do
+    spaces = spaces.." "
+  end
+
+  print("score: "..score..spaces.."lives: "..lives)
+end
   
 function _draw()
   cls()
-  print("score: "..score)
+  display_stats()
   spr(3, player.x, player.y)
   for b in all(bullets) do
     b:draw()
