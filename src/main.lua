@@ -23,7 +23,7 @@ function _init()
   last_fire = 0
   enemy_columns = {}
 
-  local column = 0
+  local column = 1
   for i = 13, 78, 13 do
     enemy_columns[column] = {}
     for j = 13, 78, 13 do
