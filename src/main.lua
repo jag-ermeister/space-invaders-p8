@@ -94,6 +94,26 @@ function _draw()
     check_collision(b, e)
     end
   end
+  for h in all(enemy_bullets) do
+    check_player_collision(h, player)
+  end
+end
+
+function check_player_collision(b, p)
+  local ul={x=p.x, y=p.y}
+  local ur={x=p.x+8, y=p.y}
+  local ll={x=p.x, y=p.y+8}
+  local lr={x=p.x+8, y=p.y+8}
+
+  if b.x>=ul.x and b.y>=ul.y and
+     b.x<=ur.x and b.y>=ur.y and
+     b.x>=ll.x and b.y<=lr.y and
+     b.x<=lr.x and b.y<=lr.y then
+    -- TODO reset player position
+    printh("player has been hit")
+    del(enemy_bullets,b)
+    lives -= 1
+  end
 end
 
 function check_collision(b, e)
