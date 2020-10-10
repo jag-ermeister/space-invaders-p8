@@ -35,8 +35,15 @@ function make_enemy(_x,_y, _column)
     draw = function(self)
       spr(self.sprite, self.x, self.y)
     end,
-    increase_speed = function(self)
+    increase_update = function(self)
       self.update_rate -= 1
+    end,
+    increase_travel = function(self)
+      if self.dx > 0 then
+        self.dx += 1
+      else
+        self.dx -= 1
+      end
     end,
     change_direction = function(self)
       self.dx *= -1

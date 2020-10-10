@@ -32,6 +32,7 @@ function game_init()
   enemy_bullets = {}
   enemies = {}
   last_fire = 0
+  difficulty = 0
   enemy_columns = {}
 
   local column = 1
@@ -160,10 +161,25 @@ function check_collision(b, e)
     del(bullets,b)
     del(enemy_columns[e.column], e)
 
-    for e in all(enemies) do
-      e:increase_speed() 
-    end
+    increase_difficulty()
 
     score += 1
   end
+end
+
+function increase_difficulty()
+  -- I think I need to try update60 again
+  -- if difficulty % 4 == 0 then
+  --   difficulty += 1
+  --   printh("incrrease frequency")
+  --   for e in all(enemies) do
+  --     e:increase_update()
+  --   end
+  -- else
+  --   difficulty += 1
+  --   printh("incrase travel")
+  --   for e in all(enemies) do
+  --     e:increase_travel()
+  --   end
+  -- end
 end
