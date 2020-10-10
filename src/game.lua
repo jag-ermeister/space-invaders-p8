@@ -1,9 +1,11 @@
 function new_game()
-  return {
+  game = {
     init = game_init,
     update = game_update,
     draw = game_draw
   }
+  game.init()
+  return game
 end
 
 function game_init()
@@ -121,6 +123,9 @@ function check_player_collision(b, p)
     -- TODO reset player position
     del(enemy_bullets,b)
     lives -= 1
+    if lives == 0 then
+      scene = new_game_over()
+    end
   end
 end
 

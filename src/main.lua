@@ -1,14 +1,13 @@
 function _init()
-  scene = new_game()
-  scene.init()
+  scene = new_main_menu()
 end
   
 function _update()
-  scene.update()
+  scene:update()
 end
  
 function _draw()
-  scene.draw()
+  scene:draw()
 end
 
 
