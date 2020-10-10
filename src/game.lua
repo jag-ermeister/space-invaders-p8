@@ -47,6 +47,8 @@ function game_init()
 end
 
 function game_update()
+  detect_game_over()
+
   player:update()
 
   if btn(2) then 
@@ -71,6 +73,19 @@ function game_update()
       end
     end
     column_num += 1
+  end
+end
+
+function detect_game_over()
+  if lives == 0 then
+    scene = new_game_over(score, "dead")
+  end
+
+  for e in all(enemies) do
+    if e.y > 115 then
+      scene = new_game_over(score, "breached")
+      break -- TODO this does not work
+    end
   end
 end
 
@@ -122,10 +137,9 @@ function check_player_collision(b, p)
      b.x<=lr.x and b.y<=lr.y then
     -- TODO reset player position
     del(enemy_bullets,b)
+
     lives -= 1
-    if lives == 0 then
-      scene = new_game_over()
-    end
+    detect_game_over()
   end
 end
 
@@ -141,9 +155,15 @@ function check_collision(b, e)
      b.x<=ur.x and b.y>=ur.y and
      b.x>=ll.x and b.y<=lr.y and
      b.x<=lr.x and b.y<=lr.y then
-   del(enemies,e)
-   del(bullets,b)
-   del(enemy_columns[e.column], e)
-   score += 1
+
+    del(enemies,e)
+    del(bullets,b)
+    del(enemy_columns[e.column], e)
+
+    for e in all(enemies) do
+      e:increase_speed() 
+    end
+
+    score += 1
   end
 end

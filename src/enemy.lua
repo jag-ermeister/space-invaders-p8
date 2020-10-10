@@ -12,15 +12,15 @@ function make_enemy(_x,_y, _column)
     update_rate = 10,
     update = function(self)
       self.last_update += 1
-      if self.last_update == self.update_rate then
+      if self.last_update >= self.update_rate then
         self.last_update = 0
         
         if self.x >= (self.start_x + self.range) then
-          self.dx =- 1
+          self:change_direction()
           self.y += self.dy
         end
-        if self.x == self.start_x then
-          self.dx = 1
+        if self.x <= self.start_x then
+          self:change_direction()
           self.y += self.dy
         end
         self.x += self.dx
@@ -30,10 +30,16 @@ function make_enemy(_x,_y, _column)
         elseif self.sprite == 2 then
           self.sprite = 1
         end
-      end
+      end    
     end,
     draw = function(self)
       spr(self.sprite, self.x, self.y)
+    end,
+    increase_speed = function(self)
+      self.update_rate -= 1
+    end,
+    change_direction = function(self)
+      self.dx *= -1
     end
   }
 end
