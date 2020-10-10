@@ -1,11 +1,9 @@
 ## Space Invaders for PICO-8
 
 #### TODO
-
-- better OOP
-- make enemies faster at some point
+- make enemies faster when they die
+- make enemies move toward the player when they die
+- repopulate enemies when they are killed
+- print score on game over screen
 - add new enemies
-- add concept of 3 lives
-- game over screen
-- start game screen
 - add barriers
