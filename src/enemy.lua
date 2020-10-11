@@ -9,28 +9,29 @@ function make_enemy(_x,_y, _column)
     dy = 3,
     range = 40,
     last_update = 0,
-    update_rate = 10,
+    update_rate = 20,
     update = function(self)
       self.last_update += 1
-      if self.last_update >= self.update_rate then
-        self.last_update = 0
-        
-        if self.x >= (self.start_x + self.range) then
-          self:change_direction()
-          self.y += self.dy
-        end
-        if self.x <= self.start_x then
-          self:change_direction()
-          self.y += self.dy
-        end
-        self.x += self.dx
+      if self.last_update < self.update_rate then
+        return
+      end
+      self.last_update = 0
 
-        if self.sprite == 1 then
-          self.sprite = 2
-        elseif self.sprite == 2 then
-          self.sprite = 1
-        end
-      end    
+      if self.x >= (self.start_x + self.range) then
+        self:change_direction()
+        self.y += self.dy
+      end
+      if self.x <= self.start_x then
+        self:change_direction()
+        self.y += self.dy
+      end
+      self.x += self.dx
+
+      if self.sprite == 1 then
+        self.sprite = 2
+      elseif self.sprite == 2 then
+        self.sprite = 1
+      end
     end,
     draw = function(self)
       spr(self.sprite, self.x, self.y)

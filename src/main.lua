@@ -2,7 +2,7 @@ function _init()
   scene = new_main_menu()
 end
   
-function _update()
+function _update60()
   scene:update()
 end
  

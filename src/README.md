@@ -9,4 +9,6 @@
 - add new enemies
 - add barriers
 - enemy speed increase needs to be mix of distance traveled
-  and update_rate - possibly try _update60?
+  and update_rate
+- better code re-use for sprite updating frequency
+
