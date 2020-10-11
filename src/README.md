@@ -11,4 +11,4 @@
 - enemy speed increase needs to be mix of distance traveled
   and update_rate
 - better code re-use for sprite updating frequency
-
+- try increasing speed after each wave? rather than during a wave?

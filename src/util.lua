@@ -6,6 +6,10 @@ function is_empty(list)
   return #list == 0
 end
 
+function length(list)
+  return #list
+end
+
 function to_string(any)
   if type(any)=="function" then
       return "function"

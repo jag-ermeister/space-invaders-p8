@@ -9,22 +9,6 @@ function new_game()
 end
 
 function game_init()
-  printh("debugging")
-  local list = {}
-  --list[0]=0
-  --list[1]=1
-  -- list[2]=2
-  -- list[3]=3
-  -- list[4]=4
-  -- list[5]="poop"
-  -- list[6]="poop"
-  -- list[7]="poop"
-  -- list[5]="poop"
-  -- list[9]="crap"
-  -- printh(#list)
-
-  printh("end debugging")
-
   player = new_player()
   score = 0
   lives = 3
@@ -35,10 +19,14 @@ function game_init()
   difficulty = 0
   enemy_columns = {}
 
+  create_enemies()
+end
+
+function create_enemies()
   local column = 1
   for i = 13, 78, 13 do
     enemy_columns[column] = {}
-    for j = 13, 78, 13 do
+    for j = 13, 65, 13 do
       local enemy = make_enemy(i, j, column)
       add(enemies, enemy)
       add(enemy_columns[column], enemy)
@@ -49,6 +37,7 @@ end
 
 function game_update()
   detect_game_over()
+  detect_enemy_wave_destroyed()
 
   player:update()
 
@@ -74,6 +63,14 @@ function game_update()
       end
     end
     column_num += 1
+  end
+end
+
+function detect_enemy_wave_destroyed()
+  if length(enemies) == 0 then
+    enemies = {}
+    enemy_columns = {}
+    create_enemies()
   end
 end
 
