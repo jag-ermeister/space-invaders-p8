@@ -23,8 +23,6 @@ function game_over_draw(self)
   cls()
   print("Score: "..self.score)
   print("")
-  printh("reason is")
-  printh(self.reason)
   if self.reason == "dead" then
     print("You died.")
   elseif self.reason == "breached" then

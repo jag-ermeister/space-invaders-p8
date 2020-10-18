@@ -71,6 +71,7 @@ function detect_enemy_wave_destroyed()
     enemies = {}
     enemy_columns = {}
     create_enemies()
+    increase_difficulty()
   end
 end
 
@@ -158,25 +159,22 @@ function check_collision(b, e)
     del(bullets,b)
     del(enemy_columns[e.column], e)
 
-    increase_difficulty()
-
     score += 1
   end
 end
 
 function increase_difficulty()
-  -- I think I need to try update60 again
-  -- if difficulty % 4 == 0 then
-  --   difficulty += 1
-  --   printh("incrrease frequency")
-  --   for e in all(enemies) do
-  --     e:increase_update()
-  --   end
-  -- else
-  --   difficulty += 1
-  --   printh("incrase travel")
-  --   for e in all(enemies) do
-  --     e:increase_travel()
-  --   end
-  -- end
+  if difficulty % 4 == 0 then
+    difficulty += 1
+    printh("incrrease frequency")
+    for e in all(enemies) do
+      e:increase_update()
+    end
+  else
+    difficulty += 1
+    printh("incrase travel")
+    for e in all(enemies) do
+      e:increase_travel()
+    end
+  end
 end
